@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J y P ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    font-family: Arial, sans-serif;
+    color: #ff2b2b;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Corazones flotando */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.heart-float {
+    position: absolute;
+    color: red;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    margin-top: 50px;
+}
+
+.title {
+    font-size: 2.5em;
+    text-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px #ff1a1a;
+}
+
+/* Corazón */
+.heart {
+    position: relative;
+    width: 220px;
+    height: 200px;
+    margin: 40px auto;
+    transform: rotate(-45deg);
+    background: red;
+    box-shadow: 0 0 30px red, 0 0 60px red;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 200px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart::before { top: -110px; left: 0; }
+.heart::after { left: 110px; top: 0; }
+
+.heart img {
+    position: absolute;
+    width: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Botones */
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes {
+    background: red;
+    color: white;
+    box-shadow: 0 0 10px red;
+}
+
+#no {
+    background: black;
+    color: red;
+    border: 1px solid red;
+    position: absolute;
+}
+
+/* Mensaje oculto */
+.hidden-message {
+    margin-top: 40px;
+    font-size: 1.3em;
+    display: none;
+    color: #ff4d4d;
+    text-shadow: 0 0 10px red;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Corazones flotando -->
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+    <div class="title">❤️ 8 Meses J y P ❤️</div>
+
+    <div class="heart">
+        <!-- Puedes cambiar esta imagen -->
+        <img src="https://i.imgur.com/8Km9tLL.png" alt="JYP">
+    </div>
+
+    <h2>¿Me amas?</h2>
+
+    <button id="yes">Sí</button>
+    <button id="no">No</button>
+
+    <div class="hidden-message" id="message">
+        Sabía que sí... ❤️<br><br>
+        Estos 8 meses contigo han sido algo increíble.  
+        No solo eres mi pareja, eres mi felicidad, mi paz y mi lugar favorito.  
+        Gracias por existir y por estar conmigo. Te amo muchísimo ❤️
+    </div>
+</div>
+
+<script>
+// ===== MÚSICA (YouTube oculto) =====
+let player;
+
+function createPlayer() {
+    if (!player) {
+        player = document.createElement("iframe");
+        player.style.display = "none";
+        player.src = "https://www.youtube.com/embed/waU75jdUnYw?autoplay=1&loop=1&playlist=waU75jdUnYw";
+        player.allow = "autoplay";
+        document.body.appendChild(player);
+    }
+}
+
+// ===== BOTÓN NO (huye) =====
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+// ===== BOTÓN SÍ =====
+const yesBtn = document.getElementById("yes");
+const message = document.getElementById("message");
+
+yesBtn.addEventListener("click", () => {
+    createPlayer(); // inicia música
+
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+
+    message.style.display = "block";
+});
+
+// ===== CORAZONES FLOTANTES =====
+const heartsContainer = document.getElementById("hearts");
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart-float");
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
